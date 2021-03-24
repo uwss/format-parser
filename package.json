@@ -2,6 +2,7 @@
   "name": "uwss-format-parser",
   "version": "0.1.0",
   "description": "A simple Node string formatting module.",
+  "main": "src/format-parser.js",
   "scripts": {
     "test": "node test/runtests.js"
   },
