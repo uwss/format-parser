@@ -1,0 +1,22 @@
+{
+  "name": "uwss-format-parser",
+  "version": "0.1.0",
+  "description": "A simple Node string formatting module.",
+  "scripts": {
+    "test": "node test/runtests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uwss/format-parser.git"
+  },
+  "keywords": [
+    "uwss",
+    "format"
+  ],
+  "author": "Adrian Gjerstad",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/uwss/format-parser/issues"
+  },
+  "homepage": "https://github.com/uwss/format-parser#readme"
+}
