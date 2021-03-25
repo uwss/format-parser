@@ -1,4 +1,6 @@
-const format = require("./format-parser.js");
+const format = require("./format");
+
+const { UnrecognizedError } = require("./errors");
 
 const weekdays = [
   "Sunday",
@@ -52,7 +54,7 @@ function time_unit(time, utc, data, flip_utc) {
   } else if(flag === "c") {
     if(options === "") {
       if(!utc) return module.exports(time, "%Y-%m-%dT%H:%M:%SZ%z");
-      return module.exports(time, "%u%Y-%m-%dT%H:%M:%SZ%z");
+      return module.exports(time, "%u%Y-%m-%dT%H:%M:%SZ");
     }
   } else if(flag === "d") {
     if(options === "") {
@@ -128,6 +130,12 @@ function time_unit(time, utc, data, flip_utc) {
     } else if(options === "-") {
       if(!utc) return time.getSeconds().toString();
       return time.getUTCSeconds().toString();
+    }
+  } else if(flag === "t") {
+    if(options === "") {
+      return Math.floor(time.getTime()/1000)
+    } else if(options === "!") {
+      return time.getTime();
     }
   } else if(flag === "u") {
     if(options === "") {
@@ -238,7 +246,7 @@ function time_unit(time, utc, data, flip_utc) {
     }
   }
 
-  throw new format.UnrecognizedError(data);
+  throw new UnrecognizedError(data);
 }
 
 /**
@@ -269,6 +277,8 @@ function time_unit(time, utc, data, flip_utc) {
  *   %-P  -  "A" or "P"
  *   %S   -  Zero-padded seconds number
  *   %-S  -  Seconds number (not padded)
+ *   %t   -  Unix Epoch Time (seconds)
+ *   %!t  -  Unix Epoch Time (milliseconds)
  *   %u   -  A switch to enable use of UTC time instead of local time. (Default: local, doesn't output anything)
  *   %W   -  Zero-padded ISO 8601 week number
  *   %-W  -  ISO 8601 week number (not padded)
